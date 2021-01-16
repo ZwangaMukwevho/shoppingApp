@@ -17,7 +17,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
-    
+
     // Fetching the authentication token from the authentication provider
     final authData = Provider.of<Auth>(context, listen: false);
 
@@ -36,18 +36,39 @@ class ProductItem extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+
+        // Holds the current price, old price and saved price
+        header: GridTileBar(
+          backgroundColor: Colors.black87,
+           title: Text(
+            'Save R50',
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Theme.of(context).accentColor),
+
+          ),
+          leading: Text('\R${product.price.toStringAsFixed(2)}',
+          style: TextStyle(color: Colors.white,),
+          
+          ),
+          trailing: Text(
+            '\R${product.price.toStringAsFixed(2)}',
+            textAlign: TextAlign.right,
+            style: TextStyle(color: Colors.white,
+            decoration: TextDecoration.lineThrough),
+          ),
+        ),
         footer: GridTileBar(
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
-                  icon: Icon(
-                    product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                  ),
-                  color: Theme.of(context).accentColor,
-                  onPressed: () {
-                    product.toggleFavoriteStatus(authData.token,authData.userId);
-                  },
-                ),
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              color: Theme.of(context).accentColor,
+              onPressed: () {
+                product.toggleFavoriteStatus(authData.token, authData.userId);
+              },
+            ),
           ),
           title: Text(
             product.title,
@@ -79,6 +100,6 @@ class ProductItem extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ); // End of child
   }
 }
