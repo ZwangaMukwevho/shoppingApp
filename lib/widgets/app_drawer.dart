@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../providers/auth.dart';
+import '../screens/categories_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -14,6 +15,17 @@ class AppDrawer extends StatelessWidget {
             title: Text('Hello Friend!'),
             automaticallyImplyLeading: false,
           ),
+
+          // Categories option
+           Divider(),
+          ListTile(
+            leading: Icon(Icons.category),
+            title: Text('Cartegories'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(CategoriesScreen.routeName);
+            },
+          ),  
           Divider(),
           ListTile(
             leading: Icon(Icons.shop),
@@ -40,6 +52,7 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),  
+ 
 
           // Creating Icon for logging out
           Divider(),
@@ -54,4 +67,4 @@ class AppDrawer extends StatelessWidget {
       ),
     );
   }
-}
+} 
