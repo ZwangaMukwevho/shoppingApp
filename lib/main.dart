@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           builder: (ctx, auth, _) => MaterialApp(
               title: 'MyShop',
               theme: ThemeData(
-                primarySwatch: Colors.purple,
+                primarySwatch: Colors.orange,
                 accentColor: Colors.deepOrange,
                 fontFamily: 'Lato',
               ),
