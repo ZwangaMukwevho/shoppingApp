@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-//mport '../screens/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String id;
   final String title;
   final Color color;
-  final String imageUrl;
+  final String imageName;
 
-  CategoryItem(this.id, this.title, this.color, this.imageUrl);
+  CategoryItem(this.id, this.title, this.color, this.imageName);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,8 @@ class CategoryItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-              imageUrl,
+            image: AssetImage(
+              imageName,
             ),
             fit: BoxFit.cover,
           ),

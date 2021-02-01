@@ -14,6 +14,8 @@ import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
 import './providers/auth.dart';
 import './screens/categories_screen.dart';
+import './screens/shops_screen.dart';
+import './screens/comparison_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -72,6 +74,8 @@ class MyApp extends StatelessWidget {
                 UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
                 EditProductScreen.routeName: (ctx) => EditProductScreen(),
                 CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
+                ShopsScreen.routeName: (ctx) => ShopsScreen(),
+                ComparisonScreen.routeName: (ctx) => ComparisonScreen(),
               }),
         ));
   }

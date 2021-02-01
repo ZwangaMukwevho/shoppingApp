@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../providers/auth.dart';
-import '../screens/categories_screen.dart';
+import '../screens/shops_screen.dart';
+import '../screens/comparison_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -16,24 +18,36 @@ class AppDrawer extends StatelessWidget {
             automaticallyImplyLeading: false,
           ),
 
-          // Categories option
-           Divider(),
-          ListTile(
-            leading: Icon(Icons.category),
-            title: Text('Cartegories'),
-            onTap: () {
-              Navigator.of(context)
-                  .pushReplacementNamed(CategoriesScreen.routeName);
-            },
-          ),  
           Divider(),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text('Shop'),
+            leading: Icon(Icons.home),
+            title: Text('Home'),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/');
             },
           ),
+
+          // Shops option
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.shop),
+            title: Text('Shops'),
+            onTap: () {
+              Navigator.of(context)
+                   .pushReplacementNamed(ShopsScreen.routeName);
+            },),
+
+          // Categories option
+           Divider(),
+          ListTile(
+            leading: Icon(Icons.outlined_flag),
+            title: Text('Compare prices'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushNamed(ComparisonScreen.routeName);
+            },
+          ),  
+          
           Divider(),
           ListTile(
             leading: Icon(Icons.payment),
@@ -52,7 +66,6 @@ class AppDrawer extends StatelessWidget {
                   .pushReplacementNamed(UserProductsScreen.routeName);
             },
           ),  
- 
 
           // Creating Icon for logging out
           Divider(),

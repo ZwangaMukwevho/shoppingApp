@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../providers/categories.dart';
+import '../models/categories.dart';
 import '../widgets/category_item.dart';
-import "../widgets/app_drawer.dart";
+
 
 class CategoriesScreen extends StatelessWidget {
 
-   static const routeName = '/Categories-screen';
+  static const routeName = '/Categories-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Price-Comp'),
+        title: const Text('Categories'),
       ),
 
       // Adding drawer icon to screen
-      drawer: AppDrawer(),
+      //drawer: AppDrawer(),
       body: GridView(
         padding: const EdgeInsets.all(25),
         children: DUMMY_CATEGORIES
@@ -24,7 +24,7 @@ class CategoriesScreen extends StatelessWidget {
                     catData.id,
                     catData.title,
                     catData.color,
-                    catData.imageUrl,
+                    catData.imageName,
                   ),
             )
             .toList(),
