@@ -141,3 +141,4 @@ const SHOPSLIST = const [
 ];
 
 var fieldName = "Select shop";
+Color shopColor = Colors.black;

@@ -16,6 +16,9 @@ import './providers/auth.dart';
 import './screens/categories_screen.dart';
 import './screens/shops_screen.dart';
 import './screens/comparison_screen.dart';
+import './providers/comp_item.dart';
+import './screens/SearchProduct.dart';
+import 'providers/searchWord.dart';
 
 void main() => runApp(MyApp());
 
@@ -35,6 +38,10 @@ class MyApp extends StatelessWidget {
               previousProducts == null ? [] : previousProducts.items,
             ),
           ),
+          // ignore: missing_required_param
+          ChangeNotifierProxyProvider<Auth, SearchWord>(
+            update: (ctx, auth, _) => SearchWord(auth.token, auth.userId),
+          ),
           ChangeNotifierProvider.value(
             value: Cart(),
           ),
@@ -46,13 +53,16 @@ class MyApp extends StatelessWidget {
               previousOrders == null ? [] : previousOrders.orders,
             ),
           ),
+          ChangeNotifierProvider.value(
+            value: Comp(),
+          ),
         ],
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MaterialApp(
               title: 'MyShop',
               theme: ThemeData(
-                primarySwatch: Colors.orange,
-                accentColor: Colors.deepOrange,
+                primarySwatch: Colors.purple,
+                accentColor: Colors.redAccent,
                 fontFamily: 'Lato',
               ),
 
@@ -76,6 +86,9 @@ class MyApp extends StatelessWidget {
                 CategoriesScreen.routeName: (ctx) => CategoriesScreen(),
                 ShopsScreen.routeName: (ctx) => ShopsScreen(),
                 ComparisonScreen.routeName: (ctx) => ComparisonScreen(),
+                ProductsOverviewScreen.routeName: (ctx) =>
+                    ProductsOverviewScreen(),
+                SeacrchProduct.routeName: (ctx) => SeacrchProduct(),
               }),
         ));
   }
