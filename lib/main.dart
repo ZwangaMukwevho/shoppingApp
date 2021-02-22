@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
                 ShopsScreen.routeName: (ctx) => ShopsScreen(),
                 ComparisonScreen.routeName: (ctx) => ComparisonScreen(),
                 ProductsOverviewScreen.routeName: (ctx) =>
-                    ProductsOverviewScreen(),
+                ProductsOverviewScreen(),
                 SeacrchProduct.routeName: (ctx) => SeacrchProduct(),
               }),
         ));

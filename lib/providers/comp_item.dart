@@ -1,51 +1,42 @@
 import 'package:flutter/foundation.dart';
 
-class CompItem {
-  final String title;
-  final String price;
-  final String imageUrl;
-  final String promo;
+import '../providers/product.dart';
 
-  CompItem(
-    this.title,
-    this.price,
-    this.imageUrl,
-    this.promo,
-  );
+class CompItem {
+  
 }
 
 class Comp with ChangeNotifier {
-  List<CompItem> _items1 = [];
-  List<CompItem> _items2 = [];
+  List<Product> _items1 = [];
+  List<Product> _items2 = [];
 
   // Fetches the comparisons items from first column
-  List<CompItem> get compItems1 {
+  List<Product> get compItems1 {
     // Returns a new list with items,
     return [..._items1];
   }
 
   // Fetches the comparisons items from second column
-  List<CompItem> get compItems2 {
+  List<Product> get compItems2 {
     // Returns a new list with items,
     return [..._items2];
   }
 
   // Functions that gets to the fist column
-  void addCompItem1(String title, String price, String imageUrl, String promo) {
+  void addCompItem1(Product product1) {
     // Add new compItem to list
-    _items1.insert(
-      0,
-      CompItem(title, price, imageUrl, promo),
+    _items1.add(
+    
+      product1,
     );
     notifyListeners();
   }
 
   // Functions that gets to the second column
-  void addCompItem2(String title, String price, String imageUrl, String promo) {
+  void addCompItem2(Product product2) {
     // Add new compItem to list
-    _items2.insert(
-      0,
-      CompItem(title, price, imageUrl, promo),
+    _items2.add(
+     product2,
     );
     notifyListeners();
   }

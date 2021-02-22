@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/providers/product.dart';
 
 import '../providers/products.dart';
 import '../providers/searchWord.dart';
+import '../providers/comp_item.dart';
 
 class SeacrchProduct extends StatefulWidget {
   static const routeName = '/Search-screen';
@@ -106,12 +108,16 @@ class Search extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) {
     final products = Provider.of<Products>(context);
     final searchWords = Provider.of<SearchWord>(context);
+    final compItem = Provider.of<Comp>(context);
     searchWords.fetchAndSetWords();
-    
+
     //recentList = searchWords.searchList;
     List<String> myList = [];
     myList = searchWords.searchList;
-    
+
+    // List of comparison items
+    // List<Product> itemList1 = [];
+    // itemList1 = compItem.compItems1;
 
     // Iterating through the list of products and creating a list of product titles
     List<String> prodList = [];
@@ -131,16 +137,28 @@ class Search extends SearchDelegate {
     return ListView.builder(
       itemCount: suggestionList.length,
       itemBuilder: (context, index) {
+        Product matchedProduct = products.items.firstWhere(
+            (prod) => prod.title.toLowerCase() == suggestionList[index]);
         return ListTile(
+          leading: CircleAvatar(
+            child: Image.network(matchedProduct.imageUrl),
+          ),
           title: Text(
             suggestionList[index],
           ),
-          onTap: (){
+          onTap: () {
             String selectedResult = suggestionList[index];
             searchWords.addWord(selectedResult);
+
+            // Adding selected product to list of items on comparison page
+            try {
+              compItem.addCompItem1(matchedProduct);
+            } catch (error) {
+              throw (error);
+            }
+
             showResults(context);
             Navigator.of(context).pop();
-            
           },
         );
       },

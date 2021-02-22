@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/column_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/searchWord.dart';
+import '../providers/comp_item.dart';
 import '../screens/SearchProduct.dart';
 
 class CompSplitView extends StatefulWidget {
@@ -65,6 +65,7 @@ class _CompSplitViewState extends State<CompSplitView> {
                       price,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.bold),
+                      softWrap: true,
                     ),
                   ),
                 ],
@@ -77,7 +78,7 @@ class _CompSplitViewState extends State<CompSplitView> {
       );
 
   // Alternative widget to hold the product
-  Widget productTile1(String name, String price, String promo) => Container(
+  Widget productTile1(String name, String price, String promo,String imageUrl) => Container(
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -95,9 +96,9 @@ class _CompSplitViewState extends State<CompSplitView> {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15),
                     ),
-                    child: Image.asset(
-                      'Assets/images/Woolworths.jpg',
-                      height: 100,
+                    child: Image.network(
+                      imageUrl,
+                      height: 70,
                       width: 150,
                       fit: BoxFit.cover,
                     ),
@@ -109,15 +110,14 @@ class _CompSplitViewState extends State<CompSplitView> {
                 child: Column(
                   children: <Widget>[
                     Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topCenter,
                       child: Text(
                         name,
                         overflow: TextOverflow.ellipsis,
                         // style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
+
                         Align(
                           //alignment: Alignment.centerLeft,
                           child: Text(
@@ -130,7 +130,7 @@ class _CompSplitViewState extends State<CompSplitView> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        //SizedBox(width: 10),
                         Align(
                           //alignment: Alignment.bottomLeft,
                           child: Text(
@@ -139,8 +139,8 @@ class _CompSplitViewState extends State<CompSplitView> {
                             //style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
-                      ],
-                    ),
+                      
+                    
                   ],
                 ),
               )
@@ -152,9 +152,9 @@ class _CompSplitViewState extends State<CompSplitView> {
   @override
   Widget build(BuildContext context) {
     // Media query variable
-    final mediaQuery = MediaQuery.of(context);
-    final searchWords = Provider.of<SearchWord>(context);
-    searchWords.fetchAndSetWords();
+    //final mediaQuery = MediaQuery.of(context);
+    final compItem = Provider.of<Comp>(context);
+    final itemList1 = compItem.compItems1;
 
     return Container(
       child: Row(
@@ -168,8 +168,22 @@ class _CompSplitViewState extends State<CompSplitView> {
               // Container that will hold the shop name
               ColumnWidget(),
 
-              // Container that'll hold an individual product
-              productTile1('Woolworths', '2 for 1', 'R35.99'),
+              // // Container that'll hold an individual product
+              Expanded(
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  child: ListView.builder(
+                    itemCount: itemList1.length,
+                    itemBuilder: (ctx, i) => productTile1(
+                      itemList1[i].title,
+                      'Nothing at all',
+                      'R${itemList1[i].price}',
+                      itemList1[i].imageUrl,
+                    ),
+                  ),
+                ),
+              ),
 
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10),
@@ -198,7 +212,7 @@ class _CompSplitViewState extends State<CompSplitView> {
             ColumnWidget(),
 
             // Container that'll hold an individual product
-            productTile1('Woolies', '2 for 1', 'R35'),
+            //productTile1('Woolies', '2 for 1', 'R35'),
           ])
         ],
       ),
